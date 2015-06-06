@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+<struts>
+
+	
+	<package name="crm" extends="struts-default">
+	<interceptors>
+		<interceptor name="johnSec" class="action.SecInterceptor"></interceptor>
+	</interceptors>
+		<action name="login" class="action.UserAction" method="login">
+			<result name="success" type="dispatcher">suc.jsp</result>
+			<result name="fail">fail.jsp</result>
+		</action>
+		<action name="regist" class="action.UserAction" method="reg">
+			<result name="success" type="stream">
+				<param name="inputName">data</param>
+			</result>
+			<result name="success1">
+				regSuc.jsp
+			</result>
+			<result name="input">
+				regist.jsp
+			</result>
+		</action>
+		<action name="ajax" class="action.AjaxAction">
+		<interceptor-ref name="johnSec"></interceptor-ref>
+		<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="stream">
+				<param name="inputName">userInfo</param>
+			</result>
+			<result name="fail" type="stream">
+				<param name="inputName">userInfo</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>
